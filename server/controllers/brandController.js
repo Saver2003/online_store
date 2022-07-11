@@ -12,6 +12,18 @@ class BrandController {
     const brands = await Brand.findAll()
     return res.json(brands)
   }
+
+  async update(req, res) {
+    const {id, name} = req.body
+    const changedBrand = await Brand.update({name}, {where: {id}})
+    return res.json(changedBrand)
+  }
+
+  async delete(req, res) {
+    const id = req.params.id
+    const brand = await Brand.destroy({where: {id}})
+    return res.json(brand)
+  }
 }
 
 module.exports = new BrandController()
